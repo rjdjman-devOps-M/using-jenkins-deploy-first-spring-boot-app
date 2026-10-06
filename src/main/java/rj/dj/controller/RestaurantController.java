@@ -28,7 +28,7 @@ public class RestaurantController {
 		if (!availableFood.isEmpty()) {
 			res.put("status", 200);
 			res.put("result", availableFood);
-			res.put("message", "data return sucessfully.");
+			res.put("message", "Data return sucessfully.");
 		} else {
 			res.put("status", 404);
 			res.put("result", "");
