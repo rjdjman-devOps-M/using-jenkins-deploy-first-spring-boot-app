@@ -8,6 +8,7 @@ pipeline {
             steps {
                 echo 'Jenkins is working'
             }
+          }
 
         stage('Start') {
             steps {
