@@ -56,7 +56,7 @@ public class RestaurantService {
 				new FoodItem(102, "Paneer Butter Masala", "Lunch", 180.0),
 				new FoodItem(103, "Dal Tadka", "Lunch", 120.0), new FoodItem(104, "Jeera Rice", "Lunch", 100.0),
 				new FoodItem(105, "Chicken Biryani", "Lunch", 220.0), new FoodItem(106, "Veg Biryani", "Lunch", 160.0),
-				new FoodItem(107, "Roti Basket", "Lunch", 80.0));
+				new FoodItem(107, "Roti Basket", "Lunch", 80.0),new FoodItem(108, "Non-Veg Thali", "Lunch", 150.0));
 	}
 
 	private List<FoodItem> getDinner() {
