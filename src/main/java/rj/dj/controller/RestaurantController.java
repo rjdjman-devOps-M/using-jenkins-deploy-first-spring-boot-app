@@ -20,8 +20,6 @@ public class RestaurantController {
 	public RestaurantController(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
 	}
-
-//	D:/Pratic-work-place/java/rj-restaurant-service-provider-web-app
 	
 	@GetMapping("/menu")
 	public ResponseEntity<?> getMenu() {
