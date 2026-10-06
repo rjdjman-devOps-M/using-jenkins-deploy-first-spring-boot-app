@@ -6,39 +6,72 @@ pipeline {
 
         stage('Start') {
             steps {
-                echo '========== BUILD STARTED =========='
+                echo '========== PIPELINE START =========='
             }
         }
 
         stage('Checkout') {
             steps {
-                echo '========== SOURCE CODE CHECKOUT =========='
+                echo '========== CHECKOUT CODE =========='
+
+                git branch: 'main',
+                    url: 'https://github.com/rjdjman-devOps-M/using-jenkins-deploy-first-spring-boot-app.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo '========== BUILDING SPRING BOOT =========='
+                echo '========== BUILD APPLICATION =========='
 
-                bat 'mvn clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
-        stage('Archive JAR') {
+        stage('Deploy') {
             steps {
-                echo '========== GENERATED JAR =========='
+                echo '========== DEPLOY APPLICATION =========='
 
-                bat 'dir target\\*.jar'
+                sh '''
+                    echo "Stopping old application..."
 
-                archiveArtifacts artifacts: 'target/*.jar',
-                                 fingerprint: true
+                    sudo systemctl stop myapp || true
+
+                    echo "Copying new JAR..."
+
+                    cp target/*.jar /opt/myapp/app.jar
+
+                    echo "Starting new application..."
+
+                    sudo systemctl start myapp
+
+                    echo "Application started"
+                '''
             }
         }
 
-        stage('End') {
+        stage('Verify') {
             steps {
-                echo '========== BUILD COMPLETED =========='
+                echo '========== VERIFY APPLICATION =========='
+
+                sh '''
+                    sudo systemctl status myapp --no-pager
+                '''
             }
+        }
+    }
+
+    post {
+
+        success {
+            echo '========== DEPLOYMENT SUCCESS =========='
+        }
+
+        failure {
+            echo '========== DEPLOYMENT FAILED =========='
+        }
+
+        always {
+            echo '========== PIPELINE END =========='
         }
     }
 }
