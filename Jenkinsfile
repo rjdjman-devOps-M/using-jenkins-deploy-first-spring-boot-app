@@ -60,13 +60,12 @@ pipeline {
                 echo '========== VERIFY APPLICATION =========='
 
                 sh '''
-                    sudo systemctl status app --no-pager
+                    sudo systemctl status myapp --no-pager
                 '''
             }
         }
     }
 
-    post {
 
         success {
             echo '========== DEPLOYMENT SUCCESS =========='
