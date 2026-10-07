@@ -60,7 +60,7 @@ pipeline {
                 echo '========== VERIFY APPLICATION =========='
 
                 sh '''
-                    sudo systemctl status myapp --no-pager
+                    sudo systemctl status app --no-pager
                 '''
             }
         }
